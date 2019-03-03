@@ -70,7 +70,7 @@ p {
    <form action="include/save.php" method="POST">
     <fieldset>
       <legend> Space Ship </legend>
-      <p>Type:
+      <p>Type of the ship:
 <select id="type" name="type">
 <option value="Type 1">Type 1</option>
 <option value="Type 2">Type 2</option>

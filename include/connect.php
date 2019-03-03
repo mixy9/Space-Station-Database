@@ -1,5 +1,4 @@
 <?php
-//connect file
 $dbServername = "localhost";
 $dbUsername = "root";
 $dbPassword = "";
