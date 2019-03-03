@@ -70,15 +70,15 @@ p {
    <form action="include/save.php" method="POST">
     <fieldset>
       <legend> Space Ship </legend>
-      <p>Vrsta:
+      <p>Type:
 <select id="type" name="type">
-<option value="Vrsta 1">Vrsta 1</option>
-<option value="Vrsta 2">Vrsta 2</option>
-<option value="Vrsta 3">Vrsta 3</option>
-<option value="Vrsta 4">Vrsta 4</option>
+<option value="Type 1">Type 1</option>
+<option value="Type 2">Type 2</option>
+<option value="Type 3">Type 3</option>
+<option value="Type 4">Type 4</option>
 </select>
-      <p>Naziv broda:
-      <input type="text" name="name" value="" placeholder="Ship name"> <br>
+      <p>Name of the space ship:
+      <input type="text" name="name" value="" placeholder="Name a ship"> <br>
       <button type="submit" name="save">Save</button>
     </fieldset>
   </form> </p>
@@ -118,7 +118,7 @@ if (mysqli_num_rows($result) > 0)
 while($row = mysqli_fetch_assoc($result))
 {
   if (empty($row['name'])) { ?>
-  <tr><td colspan = "3"> <?php echo "Nema unesenih brodova!";
+  <tr><td colspan = "3"> <?php echo "No data entered!";
 }
 else
 { ?>
@@ -178,7 +178,7 @@ else
 ?>
 
 <tr>
-  <th>Ukupno:</th>
+  <th>Total:</th>
   <th><?php echo $sum; ?></th>
 </tr>
 

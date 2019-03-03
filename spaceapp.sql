@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2019 at 04:41 PM
+-- Generation Time: Mar 03, 2019 at 04:52 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -40,8 +40,8 @@ CREATE TABLE `record` (
 --
 
 INSERT INTO `record` (`user_id`, `type`, `name`, `date`) VALUES
-(43, 'Vrsta 2', 'Ship', '2019-03-03 15:32:44'),
-(44, 'Vrsta 1', '', '2019-03-03 15:37:21');
+(47, 'Type 2', 'Shiep', '2019-03-03 15:49:34'),
+(48, 'Type 1', '', '2019-03-03 15:49:57');
 
 --
 -- Indexes for dumped tables
@@ -61,7 +61,7 @@ ALTER TABLE `record`
 -- AUTO_INCREMENT for table `record`
 --
 ALTER TABLE `record`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
