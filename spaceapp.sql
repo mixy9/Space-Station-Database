@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2019 at 04:52 PM
+-- Generation Time: Mar 06, 2019 at 09:58 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -30,18 +30,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `record` (
   `user_id` int(11) NOT NULL,
-  `type` varchar(256) DEFAULT NULL,
-  `name` varchar(256) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `type` varchar(10) DEFAULT NULL,
+  `name` varchar(20) DEFAULT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `points` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `record`
---
-
-INSERT INTO `record` (`user_id`, `type`, `name`, `date`) VALUES
-(47, 'Type 2', 'Shiep', '2019-03-03 15:49:34'),
-(48, 'Type 1', '', '2019-03-03 15:49:57');
 
 --
 -- Indexes for dumped tables
@@ -61,7 +54,7 @@ ALTER TABLE `record`
 -- AUTO_INCREMENT for table `record`
 --
 ALTER TABLE `record`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

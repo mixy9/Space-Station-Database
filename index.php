@@ -106,8 +106,12 @@ p {
   <th>Ship name</th>
   <th>Date and Time</th>
  </tr>
+
 <?php
-$sql = "SELECT type, name, date FROM record ORDER BY date DESC";
+$sql = "SELECT type, name, date
+        FROM record
+        ORDER BY date DESC";
+
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0)
@@ -127,16 +131,12 @@ else
 </tr><?php
   }
 }
-}
-else
-{
-?>
-<tr><th colspan "3"> Something is wrong! </th></tr>
-<?php
-}
-?>
+} else {
+  echo "<tr><td colspan = '3'>0 results</td></tr>";
+}?>
 </table>
 <br>
+
 <table>
 <tr>
   <th>Ship type</th>
@@ -144,29 +144,26 @@ else
 </tr>
 
 <?php
-$sql = "SELECT type, name FROM record ORDER BY date DESC";
+$sql = "SELECT type,
+        COUNT(CASE WHEN name <> '' THEN 1 ELSE NULL END)
+        AS points
+        FROM record
+        GROUP BY type";
+
 $result = mysqli_query($conn, $sql);
-$points = 0;
 $sum = 0;
 
 if (mysqli_num_rows($result) > 0) {
    // output data of each row
-while($row = mysqli_fetch_assoc($result)) { ?>
-    <tr><td><?php echo $row['type']; ?> </td>
-    <td><?php
-    if (empty($row['name']))
-    {
-        echo $points = 0;
-    } else {
-        echo $points = 1;
-        $sum += $points;
-    } ?>
+while($row = mysqli_fetch_assoc($result)) {
+  $sum += $row['points'];?>
+<tr><td><?php echo $row['type']; ?> </td>
+    <td><?php echo $row['points']; ?>
     </td></tr><?php
   }
-} else {
-?>
-<tr><th colspan "3"> Something is wrong! </th></tr>
-<?php } ?>
+}  else {
+  echo "<tr><td colspan = '3'>0 results</td></tr>";
+}?>
 
 <tr>
   <th>Total:</th>
