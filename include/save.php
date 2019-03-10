@@ -1,16 +1,13 @@
 <?php
 include_once 'connect.php';
 
-$type = $_POST['type'];
-$name = $_POST['name'];
-$points = $_POST['points'];
+$name = $_POST['ShipName'];
+$type = $_POST['Type'];
 
-$sql = "INSERT INTO record (type, name, points) VALUES ('$type', '$name', '$points')";
+$last_id = mysqli_insert_id($connect);
 
-if (mysqli_query($conn, $sql)) {
-    echo "New record created successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
+$sql = "INSERT INTO ship (Shipname, TypeID) VALUES ('$name', (SELECT TypeID FROM type WHERE type.Type = '$type'))";
+$query = mysqli_query($connect, $sql) or die(mysqli_error($connect));
+
 
 header("Location: ../index.php?save=success");

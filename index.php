@@ -57,7 +57,7 @@ div {
   background-color: #f2f2f2;
   padding: 20px;
 }
-p {
+label {
     color: #007399;
     font-size: 150%;
     font-family: courier;
@@ -69,15 +69,16 @@ p {
    <form action="include/save.php" method="POST">
     <fieldset>
       <legend> Space Ship </legend>
-      <p>Type of the ship:
-      <select name="type">
-        <option value="Type 1">Type 1</option>
-        <option value="Type 2">Type 2</option>
-        <option value="Type 3">Type 3</option>
-        <option value="Type 4">Type 4</option>
-      </select>
-      <p>Name of the space ship:
-      <input type="text" name="name" value="" placeholder="Name a ship"> <br>
+      <label>Type of the ship:</label>
+        <select name="Type">
+          <option> - Select type - </option>
+            <?php while($row1 = mysqli_fetch_assoc($result1)):;?>
+            <option value="<?php echo $row1['Type'];?>"><?php echo $row1['Type'];?></option>
+            <?php endwhile;?>
+        </select>
+       <br>
+      <label>Name of the space ship:</label>
+      <input type="text" name="ShipName" value="" placeholder="Name a ship"> <br>
       <button type="submit" name="save">Save</button>
     </fieldset>
   </form> </p>
@@ -108,26 +109,27 @@ p {
  </tr>
 
 <?php
-$sql = "SELECT type, name, date
-        FROM record
-        ORDER BY date DESC";
+$sql1 = "SELECT type.Type, ship.ShipName, ship.reg_date
+FROM ship
+INNER JOIN type ON type.TypeID = ship.TypeID
+ORDER BY reg_date DESC;";
 
-$result = mysqli_query($conn, $sql);
+$result = mysqli_query($connect, $sql1);
 
 if (mysqli_num_rows($result) > 0)
 { // output data of each row
 while($row = mysqli_fetch_assoc($result))
 {
-  if (empty($row['name'])) { ?>
+  if (empty($row['ShipName'])) { ?>
   <tr><td colspan = "3"> <?php echo "No data entered!";
 }
 else
 { ?>
 </td></tr>
-  <tr>
-  <td><?php echo $row['type']; ?></td>
-  <td><?php echo $row['name']; ?></td>
-  <td><?php echo $row['date']; ?></td>
+<tr>
+  <td><?php echo $row['Type']; ?></td>
+  <td><?php echo $row['ShipName']; ?></td>
+  <td><?php echo $row['reg_date']; ?></td>
 </tr><?php
   }
 }
@@ -137,6 +139,7 @@ else
 </table>
 <br>
 
+
 <table>
 <tr>
   <th>Ship type</th>
@@ -144,20 +147,18 @@ else
 </tr>
 
 <?php
-$sql = "SELECT type,
-        COUNT(CASE WHEN name <> '' THEN 1 ELSE NULL END)
-        AS points
-        FROM record
-        GROUP BY type";
+$sql = "SELECT type.Type, COUNT(CASE WHEN ship.ShipName <> '' THEN 1 ELSE NULL END) AS points
+        FROM type
+        RIGHT JOIN ship ON type.TypeID = ship.TypeID
+        GROUP BY Type;";
 
-$result = mysqli_query($conn, $sql);
+$result = mysqli_query($connect, $sql);
 $sum = 0;
-
 if (mysqli_num_rows($result) > 0) {
    // output data of each row
 while($row = mysqli_fetch_assoc($result)) {
   $sum += $row['points'];?>
-<tr><td><?php echo $row['type']; ?> </td>
+<tr><td><?php echo $row['Type']; ?> </td>
     <td><?php echo $row['points']; ?>
     </td></tr><?php
   }
@@ -170,5 +171,6 @@ while($row = mysqli_fetch_assoc($result)) {
   <th><?php echo $sum; ?></th>
 </tr>
 </table>
+
 </body>
 </html>
